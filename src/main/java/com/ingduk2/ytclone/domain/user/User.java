@@ -19,17 +19,17 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String lastname;
     private String role;
     private String image;
+    private String token;
     private Long tokenExp;
 
     @Builder
-    public User(String name, String email, String password, String lastname, String role, String image, Long tokenExp) {
+    public User(String name, String email, String password, String token, String role, String image, Long tokenExp) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.lastname = lastname;
+        this.token = token;
         this.role = role;
         this.image = image;
         this.tokenExp = tokenExp;

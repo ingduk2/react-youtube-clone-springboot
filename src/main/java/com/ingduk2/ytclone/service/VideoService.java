@@ -1,8 +1,9 @@
 package com.ingduk2.ytclone.service;
 
-import com.ingduk2.ytclone.controller.dto.GetVideosDto;
-import com.ingduk2.ytclone.controller.dto.UserDto;
-import com.ingduk2.ytclone.controller.dto.VideoDto;
+import com.ingduk2.ytclone.controller.dto.video.GetVideosDto;
+import com.ingduk2.ytclone.controller.dto.user.UserDto;
+import com.ingduk2.ytclone.controller.dto.video.VideoDetailDto;
+import com.ingduk2.ytclone.controller.dto.video.VideoDto;
 import com.ingduk2.ytclone.domain.user.User;
 import com.ingduk2.ytclone.domain.video.Video;
 import com.ingduk2.ytclone.domain.video.VideoRepository;
@@ -11,9 +12,9 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.ObjectInput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,7 +36,21 @@ public class VideoService {
             videoDtos.add(videoDto);
         }
 
-        GetVideosDto results = new GetVideosDto(true, videoDtos);
-        return results;
+        return new GetVideosDto(true, videoDtos);
+    }
+
+    public GetVideosDto findAllStream(){
+        List<VideoDto> videoDtos = videoRepository.findAll().stream().map(video -> {
+            UserDto userDto = new UserDto(userService.findById(video.getWriter()));
+            return new VideoDto(video, userDto);
+        }).collect(Collectors.toList());
+
+        return new GetVideosDto(true, videoDtos);
+    }
+
+    public VideoDetailDto findById(String id){
+        Video entity = videoRepository.findById(new ObjectId(id)).orElseThrow(() -> new IllegalArgumentException("해당 비디오가 없습니다. id= " + id ));
+        VideoDto videoDto = new VideoDto(entity, new UserDto(userService.findById(entity.getWriter())));
+        return new VideoDetailDto(true, videoDto);
     }
 }

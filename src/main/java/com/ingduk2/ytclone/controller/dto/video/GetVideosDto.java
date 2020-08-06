@@ -1,7 +1,5 @@
-package com.ingduk2.ytclone.controller.dto;
+package com.ingduk2.ytclone.controller.dto.video;
 
-import com.ingduk2.ytclone.domain.user.User;
-import com.ingduk2.ytclone.domain.video.Video;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;

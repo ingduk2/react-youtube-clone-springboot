@@ -1,4 +1,4 @@
-package com.ingduk2.ytclone.controller.dto;
+package com.ingduk2.ytclone.controller.dto.video;
 
 import lombok.Getter;
 
