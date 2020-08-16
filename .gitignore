@@ -4,7 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-src/main/resources/static/uploads/thumbnails
+src/main/resources/static/uploads/*
 src/main/resources/application.properties
 
 ### STS ###
