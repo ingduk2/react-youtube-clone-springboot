@@ -6,6 +6,8 @@ import com.ingduk2.ytclone.controller.dto.video.UploadFilesDto;
 import com.ingduk2.ytclone.controller.dto.video.VideoDetailDto;
 import com.ingduk2.ytclone.domain.video.Video;
 import com.ingduk2.ytclone.service.VideoService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/video")
+@RequiredArgsConstructor
+@Slf4j
 public class VideoController {
-    Logger logger = LoggerFactory.getLogger(UserController.class);
-    @Autowired
-    private VideoService videoService;
+
+    private final VideoService videoService;
 
     @GetMapping("/getVideos")
     public GetVideosDto getVideos(){
@@ -33,7 +36,7 @@ public class VideoController {
 
     @PostMapping("/getVideoDetail")
     public VideoDetailDto getVideoDetail(@RequestBody Map<String, Object> videoId){
-        logger.info("videoId : {} ", videoId.get("videoId").toString());
+        log.info("videoId : {} ", videoId.get("videoId").toString());
         return videoService.findById(videoId.get("videoId").toString());
     }
 

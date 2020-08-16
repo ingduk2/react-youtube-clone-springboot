@@ -16,9 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 @Slf4j
 public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
